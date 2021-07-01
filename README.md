@@ -16,14 +16,14 @@ Download the latest version of dove
 
 ```yaml
 - name: get dove
-  uses: pontem-network/get-dove@master
+  uses: pontem-network/get-dove@main
 ```
 
 Download a specific version of dove
 
 ```yaml
 - name: get dove
-  uses: pontem-network/get-dove@master
+  uses: pontem-network/get-dove@main
   with:
     version: 1.2.2
 ```
