@@ -1,0 +1,36 @@
+name: Test action
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  tests:
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: true
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+          - windows-latest
+    steps:
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.dove
+          key: ${{ runner.os }}-dove
+      - name: download latest version
+        uses: pontem-network/get-dove@v1
+      - name: test
+        run: dove -V
+      - name: download 1.2.1 version
+        uses: pontem-network/get-dove@v1
+        with:
+          version: 1.2.1
+      - name: test
+        run: dove -V
