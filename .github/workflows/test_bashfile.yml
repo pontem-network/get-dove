@@ -1,0 +1,41 @@
+name: Test bash file
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  tests:
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: true
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+          - windows-latest
+    steps:
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.dove
+          key: ${{ runner.os }}-dove
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: access
+        run: |
+          if [ ! "$RUNNER_OS" == "Windows" ]; then
+               sudo chown runner ./dove_download.sh && chmod +x ./dove_download.sh
+          fi
+      - name: download latest version
+        run: bash ./dove_download.sh
+      - name: test
+        run: dove -V
+      - name: download 1.2.1 version
+        run: bash ./dove_download.sh 1.2.1
+      - name: test
+        run: dove -V

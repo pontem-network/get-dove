@@ -1,0 +1,24 @@
+name: Get dove
+description: Download `dove` tool for move-lang.
+author: Pontem Network team
+branding:
+  icon: 'sunrise'
+  color: 'purple'
+inputs:
+  version:
+    description: Dove version (ex. `1.2.2` or default `latest`).
+    required: true
+    default: "latest"
+runs:
+  using: "composite"
+  steps:
+    - name: access
+      run: |
+        if [ ! "$RUNNER_OS" == "Windows" ]; then
+             sudo chown runner ${{ github.action_path }}/dove_download.sh && chmod +x ${{ github.action_path }}/dove_download.sh
+        fi
+      shell: bash
+    - name: Download
+      run: $GITHUB_ACTION_PATH/dove_download.sh ${{inputs.version}}
+      shell: bash
+
