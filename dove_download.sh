@@ -8,11 +8,16 @@ if [ ! -e $basefolder ]; then
 fi
 releases_path="$basefolder/releases.json"
 
-differencetime=$(($(date "+%s")-$(date -r $releases_path "+%s" )))
-if [ ! -e $releases_path ] || [ $differencetime -ge 600 ]; then
+if [ ! -e $releases_path ] || [ $(($(date "+%s")-$(date -r $releases_path "+%s" ))) -ge 600 ]; then
   echo "Download: releases.json"
-  curl -o "$releases_path" \
-      -s https://api.github.com/repos/pontem-network/move-tools/releases
+  if [ -z $2 ]; then
+    curl -o "$releases_path" \
+        -s https://api.github.com/repos/pontem-network/move-tools/releases
+  else
+    curl -o "$releases_path" \
+        -H "Authorization: Bearer ${2}" \
+        -s https://api.github.com/repos/pontem-network/move-tools/releases
+  fi
 fi
 
 dove_version=""
@@ -55,10 +60,18 @@ fi
 
 if [ ! -e $file_path ]; then
   echo "Download: $download_url"
-  curl -sL --fail \
-    -H "Accept: application/octet-stream" \
-    -o $file_path \
-    -s $download_url
+  if [ -z $2 ]; then
+    curl -sL --fail \
+      -H "Accept: application/octet-stream" \
+      -o $file_path \
+      -s $download_url
+  else
+    curl -sL --fail \
+      -H "Accept: application/octet-stream" \
+      -H "Authorization: Bearer ${2}" \
+      -o $file_path \
+      -s $download_url
+  fi
 fi
 
 echo "chmod 1755 $file_path"
