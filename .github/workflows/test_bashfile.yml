@@ -19,6 +19,11 @@ jobs:
           - ubuntu-latest
           - windows-latest
     steps:
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.dove
+          key: ${{ runner.os }}-dove
       - name: Checkout
         uses: actions/checkout@v1
       - name: access

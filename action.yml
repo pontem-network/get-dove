@@ -11,8 +11,6 @@ inputs:
     default: "latest"
   token:
     description: "GITHUB_TOKEN"
-    required: true
-    default: ""
 runs:
   using: "composite"
   steps:
