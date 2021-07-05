@@ -10,7 +10,7 @@ inputs:
     required: true
     default: "latest"
   token:
-    description: "GITHUB_TOKEN"
+    description: "GITHUB_TOKEN. Optional"
 runs:
   using: "composite"
   steps:
