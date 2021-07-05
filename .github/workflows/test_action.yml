@@ -19,19 +19,22 @@ jobs:
           - ubuntu-latest
           - windows-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Cache
         uses: actions/cache@v2
         with:
           path: ~/.dove
           key: ${{ runner.os }}-dove
+
       - name: download latest version
-        uses: pontem-network/get-dove@main
+        uses: ./
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: test
         run: dove -V
+
       - name: download 1.2.1 version
-        uses: pontem-network/get-dove@main
+        uses: ./
         with:
           version: 1.2.1
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -44,8 +47,10 @@ jobs:
       run:
         shell: bash
     steps:
+      - uses: actions/checkout@v2
+
       - name: download 1.1.4 version
-        uses: pontem-network/get-dove@main
+        uses: ./
         with:
           version: 1.1.4
           token: ${{ secrets.GITHUB_TOKEN }}
