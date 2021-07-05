@@ -21,6 +21,9 @@ if [ ! -e $releases_path ] || [ $(($(date "+%s")-$(date -r $releases_path "+%s" 
   mv "$releases_path.tmp" $releases_path
 fi
 
+echo "releases.json:"
+cat $releases_path
+
 dove_version=""
 if [[ $1 == "latest" || $1 == "new" || $1 == "last" || -z $1 ]]; then
   dove_version=$(cat "$releases_path" | jq -r '.[0] .tag_name')
