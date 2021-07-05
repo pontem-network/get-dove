@@ -21,6 +21,7 @@ if [ ! -e $releases_path ] || [ $(($(date "+%s")-$(date -r $releases_path "+%s" 
   mv "$releases_path.tmp" $releases_path
 fi
 
+echo "token: $2"
 echo "releases.json:"
 cat $releases_path
 
