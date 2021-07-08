@@ -40,6 +40,13 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: test
         run: dove -V
+      - name: download prerelease
+        uses: ./
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: "true"
+      - name: test
+        run: dove -V
 
   macos_test_for_1_1_4:
     runs-on: macos-latest

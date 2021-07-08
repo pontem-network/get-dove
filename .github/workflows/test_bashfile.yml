@@ -32,7 +32,7 @@ jobs:
                sudo chown runner ./dove_download.sh && chmod +x ./dove_download.sh
           fi
       - name: download latest version
-        run: bash ./dove_download.sh "" "" ${{ secrets.GITHUB_TOKEN }}
+        run: bash ./dove_download.sh "" ${{ secrets.GITHUB_TOKEN }}
       - name: test
         run: dove -V
       - name: download 1.2.1 version

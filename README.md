@@ -8,6 +8,7 @@ This GitHub Action delivers specified [`dove`] release for a Move language.
 ## Parameters
 
 - `version` - specified version of the release. Optional. Default value is `latest`.
+- `prerelease` - Allow pre-release. Default value is `false`.
 - `token` - GITHUB_TOKEN. Optional.
 
 
@@ -27,6 +28,15 @@ Download a specific version of dove
   uses: pontem-network/get-dove@main
   with:
     version: 1.2.2
+```
+
+Allow downloading pre-releases
+
+```yaml
+- name: get dove
+  uses: pontem-network/get-dove@main
+  with:
+    prerelease: "true"
 ```
 
 Download a specific version of dove and token
