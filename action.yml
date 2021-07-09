@@ -11,6 +11,9 @@ inputs:
     default: "latest"
   token:
     description: "GITHUB_TOKEN. Optional"
+  prerelease:
+    description: "Allow pre-release. False by default."
+    default: "false"
 runs:
   using: "composite"
   steps:
@@ -21,6 +24,10 @@ runs:
         fi
       shell: bash
     - name: Download
-      run: $GITHUB_ACTION_PATH/dove_download.sh ${{inputs.version}} ${{inputs.token}}
+      run: $GITHUB_ACTION_PATH/dove_download.sh
       shell: bash
+      env:
+        DOVE_VERSION: ${{inputs.version}}
+        DOVE_PRERELEASE: ${{inputs.prerelease}}
+        SECRET_TOKEN: ${{inputs.token}}
 
