@@ -107,11 +107,11 @@ filename="dove_${dove_version}-${download_type}"
 file_path="$dovefolder/$filename"
 
 download_url=$(cat "$releases_path" |
-  jq -r ".[] | select(.tag_name==\"${dove_version}\" and.tag_name==\"${dove_version}\") .assets | .[] | select(.name|test(\"^dove-${dove_version}-${download_type}\")) | .browser_download_url")
+  jq -r ".[] | select(${select_prerelease} and .tag_name==\"${dove_version}\") .assets | .[] | select(.name|test(\"^dove-${dove_version}-${download_type}\")) | .browser_download_url")
 if [ -z $download_url ]; then
   if [[ "$OSTYPE" == "darwin"* ]]; then
       download_url=$(cat "$releases_path" |
-        jq -r ".[] | select(.tag_name==\"${dove_version}\" and.tag_name==\"${dove_version}\") .assets | .[] | select(.name|test(\"^dove-${dove_version}-mac-${HOSTTYPE}\")) | .browser_download_url")
+        jq -r ".[] | select(${select_prerelease} and .tag_name==\"${dove_version}\") .assets | .[] | select(.name|test(\"^dove-${dove_version}-mac-${HOSTTYPE}\")) | .browser_download_url")
   fi
   if [ -z $download_url ]; then
     echo "Releases \"dove-${dove_version}-${download_type}\" not found"
