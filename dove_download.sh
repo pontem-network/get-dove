@@ -145,7 +145,7 @@ echo "create link $file_path"
 #   ln -sf "$file_path" $HOME/.local/bin/dove
 # elif [[ "$OSTYPE" == "darwin"* ]]; then
 set -x
-if [[ "$OSTYPE" == "linux-gnu"* || "$OSTYPE" == "freebsd"* || "$OSTYPE" == "cygwin" || "$OSTYPE" == "darwin"* ]]; then
+if [[ "$OSTYPE" == "linux-gnu"* || "$OSTYPE" == "freebsd"* || "$OSTYPE" == "darwin"* || "$OSTYPE" == "cygwin" ]]; then
   ln -sf "$file_path" /usr/local/bin/dove
 elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
   mkdir -p "$HOME/.local/bin"
