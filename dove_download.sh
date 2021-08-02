@@ -140,14 +140,12 @@ echo "chmod 1755 $file_path"
 chmod 1755 $file_path
 
 echo "create link $file_path"
-# if [[ "$OSTYPE" == "linux-gnu"* || "$OSTYPE" == "freebsd"* || "$OSTYPE" == "cygwin" ]]; then
-#   mkdir -p $HOME/.local/bin
-#   ln -sf "$file_path" $HOME/.local/bin/dove
-# elif [[ "$OSTYPE" == "darwin"* ]]; then
-set -x
-if [[ "$OSTYPE" == "linux-gnu"* || "$OSTYPE" == "freebsd"* || "$OSTYPE" == "darwin"* || "$OSTYPE" == "cygwin" ]]; then
-#   ln -sf "$file_path" /usr/local/bin/dove
-  ln -sf "$file_path" $HOME/.cargo/bin/dove
+if [[ "$OSTYPE" == "linux-gnu"* || "$OSTYPE" == "freebsd"* || "$OSTYPE" == "cygwin" ]]; then
+  mkdir -p $HOME/.local/bin
+  ln -sf "$file_path" $HOME/.local/bin/dove
+  echo "$HOME/.local/bin" >> $GITHUB_PATH
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+   ln -sf "$file_path" /usr/local/bin/dove
 elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
   mkdir -p "$HOME/.local/bin"
   ln -sf "$file_path" "$HOME/.local/bin/dove"
