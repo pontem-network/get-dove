@@ -146,7 +146,8 @@ echo "create link $file_path"
 # elif [[ "$OSTYPE" == "darwin"* ]]; then
 set -x
 if [[ "$OSTYPE" == "linux-gnu"* || "$OSTYPE" == "freebsd"* || "$OSTYPE" == "darwin"* || "$OSTYPE" == "cygwin" ]]; then
-  ln -sf "$file_path" /usr/local/bin/dove
+#   ln -sf "$file_path" /usr/local/bin/dove
+  ln -sf "$file_path" $HOME/.cargo/bin/dove
 elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
   mkdir -p "$HOME/.local/bin"
   ln -sf "$file_path" "$HOME/.local/bin/dove"
