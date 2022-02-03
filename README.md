@@ -2,7 +2,7 @@
 
 This GitHub Action delivers specified [`dove`] release for a Move language.
 
-[`dove`]: https://github.com/pontem-network/move-tools
+[`dove`]: https://github.com/pontem-network/dove
 
 
 ## Parameters
