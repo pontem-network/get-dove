@@ -30,11 +30,11 @@ if [ ! -e $releases_path ] || [ $(($(date "+%s")-$(date -r $releases_path "+%s" 
   echo "Download: releases.json";
   if [ -z $SECRET_TOKEN ]; then
     curl -o "$releases_path.tmp" \
-        -s https://api.github.com/repos/pontem-network/move-tools/releases;
+        -s https://api.github.com/repos/pontem-network/dove/releases;
   else
     curl -o "$releases_path.tmp" \
         -H "Authorization: Bearer ${SECRET_TOKEN}" \
-        -s https://api.github.com/repos/pontem-network/move-tools/releases;
+        -s https://api.github.com/repos/pontem-network/dove/releases;
   fi;
   mv "$releases_path.tmp" $releases_path;
 fi;

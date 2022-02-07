@@ -17,7 +17,8 @@ jobs:
         os:
           - macos-latest
           - ubuntu-latest
-          - windows-latest
+          # TODO: return windows back when it supported
+          # - windows-latest
     steps:
       - name: Cache
         uses: actions/cache@v2
