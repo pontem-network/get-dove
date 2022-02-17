@@ -6,14 +6,16 @@ branding:
   color: 'purple'
 inputs:
   version:
-    description: Dove version (ex. `1.2.2` or default `latest`).
-    required: true
     default: "latest"
+    description: Dove version (ex. `1.2.2` or default `latest`).
+    required: false
   token:
     description: "GITHUB_TOKEN. Optional"
+    required: false
   prerelease:
-    description: "Allow pre-release. False by default."
     default: "false"
+    description: "Allow pre-release. False by default."
+    required: false
 runs:
   using: "composite"
   steps:
