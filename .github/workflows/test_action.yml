@@ -64,3 +64,24 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: test
         run: dove -V
+
+  boogie:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v2
+      - name: download latest version
+        uses: ./
+        with:
+          boogie: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - run: dove -V
+      - run: which boogie

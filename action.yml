@@ -2,29 +2,50 @@ name: Get dove
 description: Download `dove` tool for move-lang.
 author: Pontem Network team
 branding:
-  icon: 'sunrise'
-  color: 'purple'
+  icon: sunrise
+  color: purple
 inputs:
   version:
     default: "latest"
     description: Dove version (ex. `1.2.2` or default `latest`).
     required: false
   token:
-    description: "GITHUB_TOKEN. Optional"
+    description: GITHUB_TOKEN. Optional
     required: false
   prerelease:
     default: "false"
-    description: "Allow pre-release. False by default."
+    description: Allow pre-release. False by default.
+    required: false
+  boogie:
+    default: "false"
+    description: Install optional dependencies such as Boogie, needed for `dove prove`. False by default.
     required: false
 runs:
   using: "composite"
   steps:
+    - name: boogie
+      if: ${{ inputs.boogie != 'false' }}
+      shell: bash
+      env:
+        INP_REF: main
+        SECRET_TOKEN: ${{inputs.token}}
+      run: |
+        echo "boogie install"
+        git clone https://github.com/pontem-network/get-boogie.git ./get-boogie
+
+        if [ ! "$RUNNER_OS" == "Windows" ]; then
+            sudo chown runner ./get-boogie/installer.sh;
+            chmod +x ./get-boogie/installer.sh
+        fi
+        ./get-boogie/installer.sh
+
     - name: access
+      shell: bash
       run: |
         if [ ! "$RUNNER_OS" == "Windows" ]; then
              sudo chown runner ${{ github.action_path }}/dove_download.sh && chmod +x ${{ github.action_path }}/dove_download.sh
         fi
-      shell: bash
+
     - name: Download
       run: $GITHUB_ACTION_PATH/dove_download.sh
       shell: bash
@@ -32,4 +53,3 @@ runs:
         DOVE_VERSION: ${{inputs.version}}
         DOVE_PRERELEASE: ${{inputs.prerelease}}
         SECRET_TOKEN: ${{inputs.token}}
-
