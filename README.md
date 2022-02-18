@@ -7,10 +7,10 @@ This GitHub Action delivers specified [`dove`] release for a Move language.
 
 ## Parameters
 
-- `version` - specified version of the release. Optional. Default value is `latest`.
+- `version` - Specified version of the release. Optional. Default value is `latest`.
 - `prerelease` - Allow pre-release. Default value is `false`.
+- `boogie`- Additionaly install Z3 and Boogie needed for `dove prove`. Default value is `false`.
 - `token` - GITHUB_TOKEN. Optional.
-
 
 ## Usage Example
 
@@ -46,5 +46,16 @@ Download a specific version of dove and token
   uses: pontem-network/get-dove@main
   with:
     version: 1.2.0
+    token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+Download a latest version of dove with boogie, using token
+
+```yaml
+- name: get dove
+  uses: pontem-network/get-dove@main
+  with:
+    version: latest
+    boogie: true
     token: ${{ secrets.GITHUB_TOKEN }}
 ```
